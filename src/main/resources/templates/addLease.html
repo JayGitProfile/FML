@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div align="center">
+    <h1>Add Your Lease Here</h1>
+    <form action="#" th:action="@{/success}" method="post" th:object="${lease}">
+    	<table>
+    		<tr>
+    			<td><label>Apartment Name:</label></td>
+    			<td><input type="text" th:field="*{aptName}" /></td>
+    		</tr>  
+    		<tr>
+    			<td><label>Address:</label></td>
+    			<td><input type="text" th:field="*{address}" /></td>
+    		</tr>
+    		<tr>
+    			<td><label>Lease Type:</label></td>
+    			<td><input type="radio" th:field="*{leaseType}" value="By Unit" />By Unit
+        			<input type="radio" th:field="*{leaseType}" value="By Bedroom" />By Bedroom<br/></td>
+        	</tr>
+        	<tr>
+    			<td><label>Lease Amount:</label></td>
+    			<td><input type="text" th:field="*{amount}" /></td>
+    		</tr>
+    		<tr>
+    			<td><label>Lease Duration:</label></td>
+    			<td><input type="text" th:field="*{duration}" /></td>
+    		</tr>
+    		<tr>
+    			<td><label>Rooms:</label></td>
+    			<td><input type="text" th:field="*{rooms}" /></td>
+    		</tr>
+    		<tr>
+    			<td><label>Bathrooms:</label></td>
+    			<td><input type="number" th:field="*{bathrooms}" /></td>
+    		</tr>
+    		<tr>
+    			<td><label>Member Capacity:</label></td>
+    			<td><input type="text" th:field="*{capacity}" /></td>
+    		</tr>
+    		<tr>
+    			<td><label>Existing Members:</label></td>
+    			<td><input type="text" th:field="*{existingMembers}" /></td>
+    		</tr>
+    		<tr>
+    			<td><label>Parking:</label></td>
+    			<td><input type="radio" th:field="*{parking}" value="Available" />Available
+        			<input type="radio" th:field="*{parking}" value="Not Available" />Not Available<br/></td>
+    		</tr>
+    		<tr>
+    			<td><label>Pet Friendly:</label></td>
+    			<td><input type="radio" th:field="*{petFriendly}" value="Yes" />Yes
+        			<input type="radio" th:field="*{petFriendly}" value="No" />No<br/></td>
+    		</tr>
+    		<tr>
+    			<td><label>Note:</label></td>
+    			<td><input type="text" th:field="*{note}" /></td>
+    		</tr>  		
+    	</table>  <br><br> 
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</div>
+</body>
+</html>
