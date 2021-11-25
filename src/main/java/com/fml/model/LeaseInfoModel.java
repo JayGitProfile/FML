@@ -1,10 +1,13 @@
 package com.fml.model;
 
-import lombok.NoArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
 
-@NoArgsConstructor
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+
 public class LeaseInfoModel {
 
+	public String docId;
 	public String address;
 	public String amount = "$";
 	public String aptName;
@@ -36,8 +39,30 @@ public class LeaseInfoModel {
 		this.rooms = rooms;
 	}
 	
+	public LeaseInfoModel(QueryDocumentSnapshot document) {
+		this.docId = document.getId();
+		this.address = document.getString("address");
+		this.amount = document.getString("amount");
+		this.aptName = document.getString("aptName");
+		this.bathrooms = (int)(long) document.get("bathrooms");
+		this.capacity = (int)(long) document.get("capacity");
+		this.duration = document.getString("duration");
+		this.existingMembers = (int)(long) document.get("existingMembers");
+		this.leaseType = document.getString("leaseType");
+		this.note = document.getString("note");
+		this.parking = document.getString("parking");
+		this.petFriendly = document.getString("petFriendly");
+		this.rooms = (int)(long) document.get("rooms");
+	}
+	
 	public LeaseInfoModel() {}
 
+	public String getDocId() {
+		return docId;
+	}
+	public void setDocId(String docId) {
+		this.docId = docId;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -111,9 +136,18 @@ public class LeaseInfoModel {
 		this.rooms = rooms;
 	}
 	
+	public static List<LeaseInfoModel> getLeaseList(List<QueryDocumentSnapshot> documents) {
+		List<LeaseInfoModel> list = new ArrayList<>();
+		for(QueryDocumentSnapshot document : documents) {
+			list.add(new LeaseInfoModel(document));
+		}
+		
+		return list;
+	}
+	
 	@Override
 	public String toString() {
-		return "LeaseInfoModel [address=" + address + ", amount=" + amount + ", aptName=" + aptName + ", bathrooms=" + bathrooms + ", capacity=" + capacity + ", duration=" + duration
+		return "LeaseInfoModel [docID="+docId+", address=" + address + ", amount=" + amount + ", aptName=" + aptName + ", bathrooms=" + bathrooms + ", capacity=" + capacity + ", duration=" + duration
 				+ ", existingMembers=" + existingMembers + ", leaseType=" + leaseType + ", note=" + note + ", parking="
 				+ parking + ", petFriendly=" + petFriendly + ", rooms=" + rooms + "]";
 	}

@@ -1,5 +1,6 @@
 package com.fml.controller;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,18 @@ public class LeaseController {
 	
 	@PostMapping("/success")
 	public String ade(@ModelAttribute("lease") LeaseInfoModel lease) throws InterruptedException, ExecutionException {
-		System.out.println(lease);
 		fireService.addObject((Object)lease, "LeaseInfo");
 		
-		return "redirect:/lease";
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/home")
+	public String viewLease(Model model) throws InterruptedException, ExecutionException {
+		System.out.println("controlla");
+		List<LeaseInfoModel> list = LeaseInfoModel.getLeaseList(fireService.getAllDocuments("LeaseInfo"));
+		model.addAttribute("leaseList",list);
+			
+		return "home";
 	}
 	
 	//redirect to same page pass paginate size, and document as params
