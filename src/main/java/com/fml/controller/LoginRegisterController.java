@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fml.model.LoginModel;
 import com.fml.model.UserProfileModel;
+import com.fml.service.CryptService;
 import com.fml.service.FirestoreService;
 
 @Controller
@@ -21,11 +22,20 @@ public class LoginRegisterController {
 	@Autowired
 	FirestoreService fireService;
 	
+	@Autowired
+	CryptService cryptService;
+	
+	@GetMapping("/")
+	public String loginRedirect() {
+		
+		return "redirect:/login";
+	}
+
 	@GetMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("loginObj", new LoginModel());
 		
-		return "logintemp";
+		return "login";
 	}
 	
 	@PostMapping("/login")
@@ -35,37 +45,4 @@ public class LoginRegisterController {
 		return "redirect:/home";
 	}
 	
-	@GetMapping("/register")
-	public String register(Model model) {
-		model.addAttribute("profile", new UserProfileModel());
-		
-		return "registertemp";
-	}
-	
-	@PostMapping("/register")
-	public String addUserProfile(@ModelAttribute("profile") UserProfileModel profile, Model model) throws InterruptedException, ExecutionException {		
-		if(!fireService.ifDocExists("FmlUserProfiles", profile.getEmail())) {
-			fireService.addObject((Object)profile, "FmlUserProfiles", profile.getEmail());
-		}
-		else {
-			return "redirect:/register/error";
-		}
-		
-		return "redirect:/login";
-	}
-	
-	@GetMapping("/register/{error}")
-	public String register(@PathVariable String error, Model model) {
-		UserProfileModel profile = new UserProfileModel();
-		model.addAttribute("profile",profile);
-		model.addAttribute("errorMessage","Profile Already Exists! Try Again.");
-		
-		return "register"; 
-	}
-	
-	@GetMapping("/")
-	public String temp() {
-		
-		return "logintemp";
-	}
 }

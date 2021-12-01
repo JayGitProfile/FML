@@ -41,6 +41,12 @@ public class FirestoreService {
 		return collection.get().getDocuments();
 	}
 	
+	public DocumentSnapshot getDocument(String collectionId, String docId) throws InterruptedException, ExecutionException {
+		DocumentSnapshot document = dbf.collection(collectionId).document(docId).get().get();
+		
+		return document;
+	}
+	
 	public boolean ifDocExists(String collectionId, String docId) throws InterruptedException, ExecutionException {
 		DocumentReference docRef = dbf.collection(collectionId).document(docId);
 		DocumentSnapshot document = docRef.get().get();

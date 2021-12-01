@@ -3,6 +3,7 @@ package com.fml.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 
 public class LeaseInfoModel {
@@ -40,6 +41,22 @@ public class LeaseInfoModel {
 	}
 	
 	public LeaseInfoModel(QueryDocumentSnapshot document) {
+		this.docId = document.getId();
+		this.address = document.getString("address");
+		this.amount = document.getString("amount");
+		this.aptName = document.getString("aptName");
+		this.bathrooms = (int)(long) document.get("bathrooms");
+		this.capacity = (int)(long) document.get("capacity");
+		this.duration = document.getString("duration");
+		this.existingMembers = (int)(long) document.get("existingMembers");
+		this.leaseType = document.getString("leaseType");
+		this.note = document.getString("note");
+		this.parking = document.getString("parking");
+		this.petFriendly = document.getString("petFriendly");
+		this.rooms = (int)(long) document.get("rooms");
+	}
+	
+	public LeaseInfoModel(DocumentSnapshot document) {
 		this.docId = document.getId();
 		this.address = document.getString("address");
 		this.amount = document.getString("amount");
