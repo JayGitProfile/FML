@@ -15,6 +15,11 @@ import com.google.firebase.FirebaseOptions;
 @SpringBootApplication
 public class FmlApplication {
 
+	public static final String UserProfile = "FmlUserProfiles";
+	public static final String Lease = "LeaseInfo";
+	public static final String Wishlist = "Wishlist";
+	public static final String UserIdCookie = "fmlUname";
+	
 	public static void main(String[] args) throws IOException {
 		ClassLoader cl = FmlApplication.class.getClassLoader();
 		File file = new File(Objects.requireNonNull(cl.getResource("fsfbkey.json")).getFile());

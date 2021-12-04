@@ -39,6 +39,9 @@
 										</div>
 
 										<div class="text-center pt-1 mb-5 pb-1">
+											<div th:if="${error}">
+												<p th:text="${error}" style="color:red"></p>
+											</div>
 											<button
 												class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
 												type="submit">LOGIN</button>

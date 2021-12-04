@@ -21,8 +21,8 @@
 				<a class="navbar-brand" href="#">FML</a>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a style="color:white; font-weight:bold">Home</a></li>
-				<li><a href="/wishlist">Wishlist</a></li>
+				<li><a href="/home">Home</a></li>
+				<li><a href="/wishlist" style="color:white; font-weight:bold">Wishlist</a></li>
 				<li><a href="/profile/view">Profile</a></li>
 				<li><a href="/logout">Logout</a></li>
 			</ul>
@@ -54,6 +54,9 @@
 				</tr>
 			</tbody>
 		</table>
+		<div th:if="${emptyList}">
+			<h3>You have no items in your wishlist!</h3>
+		</div>
 	</div>
 
 	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>

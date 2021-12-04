@@ -15,12 +15,14 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 
 @Service
-public class FirestoreService {
+public class FirestoreService {	
 	
 	Firestore dbf = FirestoreClient.getFirestore();
 	
 	public boolean addObject(Object obj, String collectionId, String docId) throws InterruptedException, ExecutionException {
 		ApiFuture<WriteResult> write = dbf.collection(collectionId).document(docId).set(obj);
+		
+		while(!write.isDone());
 		
 		return write.isDone();
 	}
@@ -47,10 +49,10 @@ public class FirestoreService {
 		return document;
 	}
 	
-	public boolean ifDocExists(String collectionId, String docId) throws InterruptedException, ExecutionException {
+	/*public boolean ifDocExists(String collectionId, String docId) throws InterruptedException, ExecutionException {
 		DocumentReference docRef = dbf.collection(collectionId).document(docId);
 		DocumentSnapshot document = docRef.get().get();
 		
 		return document.exists();
-	}
+	}*/
 }

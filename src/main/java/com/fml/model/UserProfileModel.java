@@ -1,5 +1,7 @@
 package com.fml.model;
 
+import com.google.cloud.firestore.DocumentSnapshot;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +16,16 @@ public class UserProfileModel {
 	public String gender;
 	public String pswd;
 	
+	public UserProfileModel() {}
+	
+	public UserProfileModel(DocumentSnapshot document) {
+		this.fName = document.getString("fName");
+		this.lName = document.getString("lName");
+		this.email = document.getString("email");
+		this.phone = document.getString("phone");
+		this.gender = document.getString("gender");
+		this.pswd = document.getString("pswd");
+	}
 	
 	public String getfName() {
 		return fName;

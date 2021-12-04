@@ -32,8 +32,8 @@
 								placeholder="Password" th:required="required" /> <input
 								type="password" id="repswd" placeholder="Re-Type Password"
 								/ th:required="required" /> 
-								<p class="error" th:if="${errorMessage}"
-								th:text="${errorMessage}" />
+								<p class="error" th:if="${error}"
+								th:text="${error}" />
 							<button type="submit" class="next action-button"
 								onclick="return Validate()">SIGN UP</button>
 						</fieldset>
