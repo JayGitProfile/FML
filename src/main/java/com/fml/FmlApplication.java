@@ -24,7 +24,8 @@ public class FmlApplication {
 		ClassLoader cl = FmlApplication.class.getClassLoader();
 		File file = new File(Objects.requireNonNull(cl.getResource("fsfbkey.json")).getFile());
 		FileInputStream serviceAccount =
-				  new FileInputStream(file.getAbsolutePath());
+				  new FileInputStream(file);
+		System.out.println("path: "+file.getAbsolutePath());
 		FirebaseOptions options = new FirebaseOptions.Builder()
 				  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 				  .build();
