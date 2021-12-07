@@ -1,10 +1,10 @@
-package com.fml;
+package com.fire;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FmlApplicationTests {
+class FirestoreselfApplicationTests {
 
 	@Test
 	void contextLoads() {

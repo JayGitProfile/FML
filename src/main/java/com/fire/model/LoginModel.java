@@ -1,4 +1,4 @@
-package com.fml.model;
+package com.fire.model;
 
 public class LoginModel {
 

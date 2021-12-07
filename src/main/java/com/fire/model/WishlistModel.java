@@ -1,4 +1,4 @@
-package com.fml.model;
+package com.fire.model;
 
 import java.util.ArrayList;
 import java.util.List;

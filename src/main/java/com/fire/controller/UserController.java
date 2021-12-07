@@ -1,4 +1,4 @@
-package com.fml.controller;
+package com.fire.controller;
 
 import java.util.concurrent.ExecutionException;
 
@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fml.FmlApplication;
-import com.fml.model.UserProfileModel;
-import com.fml.service.AuthService;
-import com.fml.service.CryptService;
-import com.fml.service.FirestoreService;
+import com.fire.FirestoreselfApplication;
+import com.fire.model.UserProfileModel;
+import com.fire.service.AuthService;
+import com.fire.service.CryptService;
+import com.fire.service.FirestoreService;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 @Controller
 public class UserController {
@@ -42,10 +43,10 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public String addUserProfile(@ModelAttribute("profile") UserProfileModel profile, Model model) throws InterruptedException, ExecutionException {		
-		if(!fireService.getDocument(FmlApplication.UserProfile, profile.getEmail()).exists()) {
+	public String addUserProfile(@ModelAttribute("profile") UserProfileModel profile, Model model) throws InterruptedException, ExecutionException, UnirestException {
+		if(!fireService.getDocument(FirestoreselfApplication.UserProfile, profile.getEmail()).exists()) {
 			profile.setPswd(cryptService.encrypt(profile.getPswd()));
-			fireService.addObject((Object)profile, FmlApplication.UserProfile, profile.getEmail());
+			fireService.addObject((Object)profile, FirestoreselfApplication.UserProfile, profile.getEmail());
 		}
 		else {
 			return "redirect:/register?error=exist";
@@ -58,7 +59,7 @@ public class UserController {
 	public String showProfile(@PathVariable(required=false) String type, Model model, HttpServletRequest request) throws InterruptedException, ExecutionException {
 		String cookieVal = authService.getCookieValIfExists("fmlUname", request);
 		if(cookieVal!=null) {
-			model.addAttribute("profile", new UserProfileModel(fireService.getDocument("FmlUserProfiles", cookieVal)));
+			model.addAttribute("profile", new UserProfileModel(fireService.getDocument(FirestoreselfApplication.UserProfile, cookieVal)));
 			model.addAttribute("type",type);
 			
 			return "profile";
@@ -67,14 +68,15 @@ public class UserController {
 		return "redirect:/login";
 	}
 	
-	@PostMapping("/profile/update")
+	/*@PostMapping("/profile/update")
 	public String updateUserProfile(@ModelAttribute("profile") UserProfileModel profile, Model model, HttpServletRequest request) throws InterruptedException, ExecutionException {		
 		String cookieVal = authService.getCookieValIfExists("fmlUname", request);
 		if(cookieVal!=null) {
 			profile.setEmail(cookieVal);
+			profile.setPswd(cryptService.encrypt(profile.getPswd()));
 			fireService.addObject((Object)profile, "FmlUserProfiles", profile.getEmail());
 		}
 		
 		return "redirect:/profile/view";
-	}
+	}*/
 }

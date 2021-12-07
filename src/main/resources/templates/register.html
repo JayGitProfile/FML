@@ -22,18 +22,14 @@
 								th:field="*{lName}" placeholder="Last Name"
 								th:required="required" /> <input type="email"
 								th:field="*{email}" placeholder="Email" th:required="required" />
-							<!--<select name="choice">
-								<option value="" disabled selected hidden>Gender</option>
-  								<option value="Male">Male</option>
-  								<option value="Female" >Female</option>
-  								<option value="Other">Other</option>
-							</select>-->
+							<input type="text" th:field="*{phone}" placeholder="Phone"
+								th:required="required" /> <input type="text"
+								th:field="*{gender}" placeholder="Gender" th:required="required" />
 							<input type="password" id="pswd" th:field="*{pswd}"
 								placeholder="Password" th:required="required" /> <input
 								type="password" id="repswd" placeholder="Re-Type Password"
-								/ th:required="required" /> 
-								<p class="error" th:if="${error}"
-								th:text="${error}" />
+								/ th:required="required" />
+							<p class="error" th:if="${error}" th:text="${error}" />
 							<button type="submit" class="next action-button"
 								onclick="return Validate()">SIGN UP</button>
 						</fieldset>

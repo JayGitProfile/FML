@@ -1,12 +1,8 @@
-package com.fml.model;
+package com.fire.model;
 
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserProfileModel {
 
 	public String fName;

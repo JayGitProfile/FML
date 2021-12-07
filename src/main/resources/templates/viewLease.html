@@ -18,10 +18,19 @@
 		style="margin-top: 15px; margin-left: 15px; margin-right: 15px;">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">FML</a>
+				<a class="navbar-brand" href="#">Find My Lease</a>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/home">Home</a></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Lease Inbox </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="/inbox/lro">Requests for your lease</a> <a
+							class="dropdown-item" href="/inbox/lru">Your request statuses</a>
+					</div></li>
+				<li><a href="/lease">Your Leases</a></li>
 				<li><a href="/wishlist">Wishlist</a></li>
 				<li><a href="/profile/view">Profile</a></li>
 				<li><a href="/logout">Logout</a></li>
@@ -108,7 +117,7 @@
 	</div>
 
 	<div class="connect">
-		<a th:href="@{/home}">
+		<a th:href="@{/connect(lease=${leaseId}, apt=${lease.aptName})}">
 			<button class="btn" style="background: #f9f9f9; color:#337ab7;" onclick="return connect()">
 			Connect With Lease Owner&nbsp;&nbsp;<i class="fa fa-envelope" aria-hidden="true"></i>
 			</button>
@@ -137,7 +146,7 @@
 	</script>
 	<script type="text/javascript">
 		function connect() {
-			alert("Thank you! The lease owner has been notified. Please wait for their approval to get contact information.");
+			alert("Thank you! The lease owner will be notified. Please wait for their approval to get contact information.");
 			
 			return true;
 		}

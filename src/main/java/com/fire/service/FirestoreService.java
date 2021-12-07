@@ -1,4 +1,4 @@
-package com.fml.service;
+package com.fire.service;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -29,7 +29,6 @@ public class FirestoreService {
 	
 	public boolean addObject(Object obj, String collectionId) throws InterruptedException, ExecutionException {
 		String docId = dbf.collection(collectionId).document().getId();
-		System.out.println("ID "+docId);
 		
 		ApiFuture<WriteResult> write = dbf.collection(collectionId).document(docId).set(obj);
 		while(!write.isDone());
@@ -47,6 +46,11 @@ public class FirestoreService {
 		DocumentSnapshot document = dbf.collection(collectionId).document(docId).get().get();
 		
 		return document;
+	}
+	
+	public void deleteDoc(String collectionId, String docId) {
+		ApiFuture<WriteResult> delete = dbf.collection(collectionId).document(docId).delete();
+		while(!delete.isDone());
 	}
 	
 	/*public boolean ifDocExists(String collectionId, String docId) throws InterruptedException, ExecutionException {

@@ -1,4 +1,4 @@
-package com.fml.service;
+package com.fire.service;
 
 import java.util.concurrent.ExecutionException;
 
@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
-import com.fml.model.LoginModel;
-import com.fml.model.UserProfileModel;
+import com.fire.model.LoginModel;
+import com.fire.model.UserProfileModel;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 @Service
 public class AuthService {
@@ -20,17 +21,13 @@ public class AuthService {
 	    response.addCookie(cookie);
 	}
 
-	public boolean isAuthUser(LoginModel loginObj, FirestoreService fireService, HttpServletResponse response, CryptService cryptService) throws InterruptedException, ExecutionException {
-		System.out.println("auth begin");
+	public boolean isAuthUser(LoginModel loginObj, FirestoreService fireService, HttpServletResponse response, CryptService cryptService) throws InterruptedException, ExecutionException, UnirestException {
 		DocumentSnapshot doc = fireService.getDocument("FmlUserProfiles", loginObj.getEmail());
 		if(doc.exists() && (loginObj.getPswd().equals(cryptService.decrypt(doc.getString("pswd"))))) { // is valid user
-			System.out.println("is valid bruh enjoy");
 			addCookie("fmlUname", loginObj.getEmail(), response);
 			
 			return true;
 		}
-		System.out.println("auth failed");
-		//addUserCookie(loginObj.getEmail());
 		
 		return false;
 	}
@@ -40,13 +37,11 @@ public class AuthService {
 	    if (cookies != null) {
 	        for(Cookie c: cookies) {
 	        	if(c.getName().equals(cookieKey)) {
-	        		System.out.println("exists\t"+c.getName() + "=" + c.getValue());
 	        		
 	        		return c.getValue();
 	        	}
 	        }
 	    }
-	    System.out.println("cookie "+cookieKey+" not found");
 	    
 		return null;
 	}
