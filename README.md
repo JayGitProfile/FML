@@ -13,6 +13,8 @@ To run app from jar:
 1. Open terminal and navigate inside "jar" folder
 2. Command to run jar: java -jar firestoreself-0.0.1-SNAPSHOT.jar
 
-App runs on: http://localhost:8080
+Google functions code can be found under "cloud-function-src" folder
 
+
+App runs on: http://localhost:8080
 Hosted App URL: http://projectcloudlab4.wn.r.appspot.com
